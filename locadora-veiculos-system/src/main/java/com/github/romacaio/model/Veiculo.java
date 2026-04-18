@@ -1,0 +1,68 @@
+package com.github.romacaio.model;
+
+public abstract class Veiculo {
+    private String modelo;
+    private String placa;
+    private int ano;
+    private Status status;
+
+    public Veiculo(String modelo, String placa, int ano, Status status) {
+        this.modelo = modelo;
+        this.placa = placa;
+        this.ano = ano;
+        this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (!this.getClass().equals(obj.getClass())) return false;
+        Veiculo other = (Veiculo) obj;
+        return placa.equals(other.getPlaca());
+    }
+
+    @Override
+    public int hashCode() {
+        return placa.hashCode();
+    }
+
+    public abstract double calcularCustoLocacao(int dias);
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Modelo: %s\nAno: %d\nPlaca: %s", modelo, ano, placa);
+    }
+}
