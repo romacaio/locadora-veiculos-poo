@@ -1,4 +1,4 @@
-package com.github.romacaio.model;
+package com.github.romacaio.model.veiculo;
 
 public abstract class Veiculo {
     private String modelo;
@@ -17,7 +17,7 @@ public abstract class Veiculo {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (this == obj) return true;
-        if (!this.getClass().equals(obj.getClass())) return false;
+        if (!(obj instanceof Veiculo)) return false;
         Veiculo other = (Veiculo) obj;
         return placa.equals(other.getPlaca());
     }

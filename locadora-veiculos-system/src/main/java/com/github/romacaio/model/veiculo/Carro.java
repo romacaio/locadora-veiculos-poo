@@ -1,4 +1,4 @@
-package com.github.romacaio.model;
+package com.github.romacaio.model.veiculo;
 
 public class Carro extends Veiculo {
 

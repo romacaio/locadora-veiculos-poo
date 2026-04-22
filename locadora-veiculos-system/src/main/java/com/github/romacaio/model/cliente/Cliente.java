@@ -1,4 +1,4 @@
-package com.github.romacaio.model;
+package com.github.romacaio.model.cliente;
 
 public class Cliente {
     private String nome;

@@ -1,4 +1,4 @@
-package com.github.romacaio.model;
+package com.github.romacaio.model.pagamento;
 
 import java.time.LocalDate;
 
@@ -6,14 +6,14 @@ public class Pagamento {
     private int id;
     private int idLocacao;
     private double valor;
-    private LocalDate dataPagemento;
+    private LocalDate dataPagamento;
     private MetodoPagamento metodoPagamento;
 
     public Pagamento(int id, int idLocacao, double valor, MetodoPagamento metodoPagamento) {
         this.id = id;
         this.idLocacao = idLocacao;
         this.valor = valor;
-        this.dataPagemento = LocalDate.now();
+        this.dataPagamento = LocalDate.now();
         this.metodoPagamento = metodoPagamento;
     }
 
@@ -33,12 +33,12 @@ public class Pagamento {
         this.valor = valor;
     }
 
-    public LocalDate getDataPagemento() {
-        return dataPagemento;
+    public LocalDate getDataPagamento() {
+        return dataPagamento;
     }
 
-    public void setDataPagemento(LocalDate dataPagemento) {
-        this.dataPagemento = dataPagemento;
+    public void setDataPagamento(LocalDate dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 
     public MetodoPagamento getMetodoPagamento() {

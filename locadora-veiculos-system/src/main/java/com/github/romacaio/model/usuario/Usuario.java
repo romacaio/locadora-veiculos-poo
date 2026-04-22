@@ -1,4 +1,4 @@
-package com.github.romacaio.model;
+package com.github.romacaio.model.usuario;
 
 public class Usuario {
     private String userName;

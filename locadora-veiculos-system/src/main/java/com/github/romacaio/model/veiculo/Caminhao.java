@@ -1,4 +1,4 @@
-package com.github.romacaio.model;
+package com.github.romacaio.model.veiculo;
 
 public class Caminhao extends Veiculo {
     public Caminhao(String modelo, String placa, int ano, Status status) {
