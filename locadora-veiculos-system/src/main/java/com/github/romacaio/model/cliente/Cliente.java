@@ -24,7 +24,7 @@ public class Cliente {
 
     @Override
     public int hashCode() {
-       return cpf.hashCode();
+        return cpf.hashCode();
     }
 
     public String getNome() {
@@ -61,6 +61,11 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Nome: " + this.nome + "\nCPF: " + this.cpf + "\nTelefone: " + telefone + "\nEmail: " + email;
+        return "Cliente {" +
+                "\n Nome: " + this.nome +
+                "\n CPF: " + this.cpf +
+                "\n Telefone: " + telefone +
+                "\n Email: " + email +
+                "\n}";
     }
 }

@@ -103,4 +103,17 @@ public class Locacao {
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
     }
+
+    @Override
+    public String toString() {
+        return "Locação{ " +
+                "\n ID: " + id +
+                "\n Cliente: " + cliente.getNome() +
+                "\n Veículo: " + veiculo.getModelo() + " (" + veiculo.getPlaca() + ")" +
+                "\n Data retirada: " + dataRetirada +
+                "\n Data prevista Devolução: " + dataPrevistaDevolucao +
+                "\n Data devolução: " + (dataDevolucao != null ? dataDevolucao : "Ainda não foi devolvido") +
+                "\n Valor total: " + (dataDevolucao != null ? calcularValorTotal() : "Em aberto") +
+                "\n}";
+    }
 }

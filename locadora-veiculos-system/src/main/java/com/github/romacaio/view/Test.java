@@ -1,10 +1,13 @@
 package com.github.romacaio.view;
 
 import com.github.romacaio.dao.ClienteDao;
+import com.github.romacaio.dao.LocacaoDao;
 import com.github.romacaio.dao.VeiculoDao;
 import com.github.romacaio.model.cliente.Cliente;
+import com.github.romacaio.model.locacao.Locacao;
 import com.github.romacaio.model.veiculo.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,7 @@ public class Test {
     public static void main(String[] args) {
         VeiculoDao veiculoDao = new VeiculoDao();
         ClienteDao clienteDao = new ClienteDao();
+        LocacaoDao locacaoDao = new LocacaoDao();
 
         List<Veiculo> veiculos = new ArrayList<>(List.of(
                 new Carro("Gol", "ABC123", 2020, Status.DISPONIVEL),
@@ -26,17 +30,25 @@ public class Test {
         ));
 
         veiculoDao.salvar(veiculos);
-        List<Veiculo> carregados1 = veiculoDao.carregar();
-        carregados1.forEach(System.out::println);
+        List<Veiculo> veiculosLoaded = veiculoDao.carregar();
+        veiculosLoaded.forEach(System.out::println);
 
         System.out.println("-".repeat(30));
 
         clienteDao.salvar(clientes);
-        List<Cliente> carregados2 = clienteDao.carregar();
+        List<Cliente> clientesLoaded = clienteDao.carregar();
+        clientesLoaded.forEach(System.out::println);
 
-        carregados2.forEach(System.out::println);
+        System.out.println("-".repeat(30));
 
+        List<Locacao> locacoes = List.of(
+                new Locacao(1, clientesLoaded.get(0), veiculosLoaded.get(0),
+                        LocalDate.now(), LocalDate.now().plusDays(3))
+        );
 
+        locacaoDao.salvar(locacoes);
+        List<Locacao> locLoaded = locacaoDao.carregar();
+        locLoaded.forEach(System.out::println);
     }
 }
 

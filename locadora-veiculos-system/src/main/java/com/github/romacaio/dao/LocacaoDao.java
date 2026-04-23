@@ -1,6 +1,6 @@
 package com.github.romacaio.dao;
 
-import com.github.romacaio.model.veiculo.Veiculo;
+import com.github.romacaio.model.locacao.Locacao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -12,37 +12,37 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VeiculoDao implements Persistencia<Veiculo> {
-    private static final Path ARQUIVO = Path.of("./json/veiculos.json");
+public class LocacaoDao implements Persistencia<Locacao> {
+    private static final Path ARQUIVO = Path.of("./json/locacoes.json");
     private Gson gson;
 
-    public VeiculoDao() {
+    public LocacaoDao() {
         this.gson = JsonConfig.criarGson();
     }
 
     @Override
-    public void salvar(List<Veiculo> dados) {
+    public void salvar(List<Locacao> dados) {
         try {
             Files.createDirectories(ARQUIVO.getParent());
-            Type tipo = new TypeToken<List<Veiculo>>() {
+            Type tipo = new TypeToken<List<Locacao>>() {
             }.getType();
 
             String json = gson.toJson(dados, tipo);
             Files.writeString(ARQUIVO, json, StandardCharsets.UTF_8);
 
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao salvar veículos", e);
+            throw new RuntimeException("Erro ao salvar locações", e);
         }
     }
 
     @Override
-    public List<Veiculo> carregar() {
+    public List<Locacao> carregar() {
         try {
             String json = Files.readString(ARQUIVO);
-            Type tipo = new TypeToken<List<Veiculo>>() {
+            Type tipo = new TypeToken<List<Locacao>>() {
             }.getType();
 
-            List<Veiculo> lista = gson.fromJson(json, tipo);
+            List<Locacao> lista = gson.fromJson(json, tipo);
             return lista != null ? lista : new ArrayList<>();
 
         } catch (IOException e) {

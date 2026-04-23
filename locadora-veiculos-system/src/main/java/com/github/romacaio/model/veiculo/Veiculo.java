@@ -63,6 +63,11 @@ public abstract class Veiculo {
 
     @Override
     public String toString() {
-        return String.format("Modelo: %s\nAno: %d\nPlaca: %s", modelo, ano, placa);
+        return this.getClass().getSimpleName() + " {" +
+                "\n Modelo: " + modelo + " (" + ano + ")" +
+                "\n Placa: " + placa +
+                "\n Status: " + status +
+                "\n}";
+
     }
 }

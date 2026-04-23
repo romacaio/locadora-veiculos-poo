@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "cliente": {
+      "nome": "Germán Ezequiel Cano",
+      "cpf": "016.332.414-28",
+      "telefone": "8399914779",
+      "email": "caio12@gmail.com"
+    },
+    "veiculo": {
+      "modelo": "Gol",
+      "placa": "ABC123",
+      "ano": 2020,
+      "status": "DISPONIVEL",
+      "tipo": "Carro"
+    },
+    "dataRetirada": "22/04/2026",
+    "dataPrevistaDevolucao": "25/04/2026"
+  }
+]
