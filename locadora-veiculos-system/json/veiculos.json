@@ -5,19 +5,5 @@
     "ano": 2020,
     "status": "DISPONIVEL",
     "tipo": "Carro"
-  },
-  {
-    "modelo": "CG",
-    "placa": "XYZ789",
-    "ano": 2022,
-    "status": "DISPONIVEL",
-    "tipo": "Moto"
-  },
-  {
-    "modelo": "Volvo FH 540",
-    "placa": "ABC123",
-    "ano": 2019,
-    "status": "DISPONIVEL",
-    "tipo": "Caminhao"
   }
 ]

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class LocacaoController {
     private LocacaoDao locacaoDao;
@@ -69,12 +70,16 @@ public class LocacaoController {
     }
 
     public List<Locacao> listarEmAberto() {
+        return filtrar(loc -> loc.getDataDevolucao() == null);
+    }
+
+    private List<Locacao> filtrar(Predicate<Locacao> predicate) {
         return locacoes.stream()
-                .filter(l -> l.getDataDevolucao() == null)
+                .filter(predicate)
                 .toList();
     }
 
-    public List<Locacao> getListaLocacoes() {
+    public List<Locacao> getLocacoes() {
         return new ArrayList<>(locacoes);
     }
 }

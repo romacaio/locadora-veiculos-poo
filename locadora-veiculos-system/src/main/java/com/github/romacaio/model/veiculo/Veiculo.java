@@ -19,7 +19,7 @@ public abstract class Veiculo {
         if (this == obj) return true;
         if (!(obj instanceof Veiculo)) return false;
         Veiculo other = (Veiculo) obj;
-        return placa.equals(other.getPlaca());
+        return placa.equalsIgnoreCase(other.getPlaca());
     }
 
     @Override
