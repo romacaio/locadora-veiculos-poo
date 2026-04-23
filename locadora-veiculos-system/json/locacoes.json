@@ -2,19 +2,19 @@
   {
     "id": 1,
     "cliente": {
-      "nome": "Germán Ezequiel Cano",
-      "cpf": "016.332.414-28",
-      "telefone": "8399914779",
+      "nome": "Frederico Chaves Guedes",
+      "cpf": "085.168.714-30",
+      "telefone": "219124589",
       "email": "caio12@gmail.com"
     },
     "veiculo": {
-      "modelo": "Gol",
-      "placa": "ABC123",
-      "ano": 2020,
-      "status": "DISPONIVEL",
-      "tipo": "Carro"
+      "modelo": "CG",
+      "placa": "XYZ789",
+      "ano": 2022,
+      "status": "LOCADO",
+      "tipo": "Moto"
     },
-    "dataRetirada": "22/04/2026",
-    "dataPrevistaDevolucao": "25/04/2026"
+    "dataRetirada": "23/04/2026",
+    "dataPrevistaDevolucao": "26/04/2026"
   }
 ]

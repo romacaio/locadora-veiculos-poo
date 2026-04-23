@@ -1,7 +1,7 @@
 package com.github.romacaio.model.locacao;
 
-import com.github.romacaio.model.pagamento.Pagamento;
 import com.github.romacaio.model.cliente.Cliente;
+import com.github.romacaio.model.pagamento.Pagamento;
 import com.github.romacaio.model.veiculo.Status;
 import com.github.romacaio.model.veiculo.Veiculo;
 

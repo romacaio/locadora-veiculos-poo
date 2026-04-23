@@ -1,5 +1,6 @@
 package com.github.romacaio.view;
 
+import com.github.romacaio.controller.LocacaoController;
 import com.github.romacaio.dao.ClienteDao;
 import com.github.romacaio.dao.LocacaoDao;
 import com.github.romacaio.dao.VeiculoDao;
@@ -16,6 +17,7 @@ public class Test {
         VeiculoDao veiculoDao = new VeiculoDao();
         ClienteDao clienteDao = new ClienteDao();
         LocacaoDao locacaoDao = new LocacaoDao();
+        LocacaoController locacaoController = new LocacaoController();
 
         List<Veiculo> veiculos = new ArrayList<>(List.of(
                 new Carro("Gol", "ABC123", 2020, Status.DISPONIVEL),
@@ -49,6 +51,11 @@ public class Test {
         locacaoDao.salvar(locacoes);
         List<Locacao> locLoaded = locacaoDao.carregar();
         locLoaded.forEach(System.out::println);
+
+        System.out.println("-".repeat(30));
+
+        locacaoController.registrarLocacao(clientes.get(1), veiculos.get(1), 3);
+        locacaoController.getListaLocacoes().forEach(System.out::println);
     }
 }
 
