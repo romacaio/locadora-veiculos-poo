@@ -15,8 +15,8 @@ public class Cliente {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
         if (this == obj) return true;
+        if (obj == null) return false;
         if (!this.getClass().equals(obj.getClass())) return false;
         Cliente other = (Cliente) obj;
         return cpf.equalsIgnoreCase(other.getCpf());

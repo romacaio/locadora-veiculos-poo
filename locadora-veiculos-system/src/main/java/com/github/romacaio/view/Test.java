@@ -2,12 +2,16 @@ package com.github.romacaio.view;
 
 import com.github.romacaio.controller.ClienteController;
 import com.github.romacaio.controller.LocacaoController;
+import com.github.romacaio.controller.UsuarioController;
 import com.github.romacaio.controller.VeiculoController;
 import com.github.romacaio.dao.ClienteDao;
 import com.github.romacaio.dao.LocacaoDao;
+import com.github.romacaio.dao.UsuarioDao;
 import com.github.romacaio.dao.VeiculoDao;
 import com.github.romacaio.model.cliente.Cliente;
 import com.github.romacaio.model.locacao.Locacao;
+import com.github.romacaio.model.usuario.TipoUsuario;
+import com.github.romacaio.model.usuario.Usuario;
 import com.github.romacaio.model.veiculo.*;
 
 import java.time.LocalDate;
@@ -19,9 +23,11 @@ public class Test {
         VeiculoDao veiculoDao = new VeiculoDao();
         ClienteDao clienteDao = new ClienteDao();
         LocacaoDao locacaoDao = new LocacaoDao();
+        UsuarioDao usuarioDao = new UsuarioDao();
         LocacaoController locacaoController = new LocacaoController();
         VeiculoController veiculoController = new VeiculoController();
         ClienteController clienteController = new ClienteController();
+        UsuarioController usuarioController = new UsuarioController();
 
         List<Veiculo> veiculos = new ArrayList<>(List.of(
                 new Carro("Gol", "ABC123", 2020, Status.DISPONIVEL),
@@ -61,6 +67,17 @@ public class Test {
 
         System.out.println("-".repeat(30));
 
+        // UsuarioDao
+        List<Usuario> usuarios = List.of(
+                new Usuario("Maria", "142", TipoUsuario.ADMIN),
+                new Usuario("joao", "123", TipoUsuario.ATENDENTE)
+        );
+
+        usuarioDao.salvar(usuarios);
+        usuarioDao.carregar().forEach(System.out::println);
+
+        System.out.println("-".repeat(30));
+
         // LocacaoController
         locacaoController.registrarLocacao(clientes.get(1), veiculos.get(1), 3);
         locacaoController.getLocacoes().forEach(System.out::println);
@@ -77,6 +94,13 @@ public class Test {
         // ClienteController
         clienteController.cadastrarCliente(new Cliente("João", "123", "9999", "email@email.com"));
         clienteController.getClientes().forEach(System.out::println);
+
+        System.out.println("-".repeat(30));
+
+        // UsuarioController
+        usuarioController.cadastrarUsuario(new Usuario("Luana", "345", TipoUsuario.ADMIN));
+        usuarioController.loginUsuario("Luana", "345");
+        System.out.println(usuarioController.getUsuarioLogado());
     }
 }
 

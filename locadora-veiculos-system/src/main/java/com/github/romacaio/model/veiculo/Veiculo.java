@@ -15,8 +15,8 @@ public abstract class Veiculo {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
         if (this == obj) return true;
+        if (obj == null) return false;
         if (!(obj instanceof Veiculo)) return false;
         Veiculo other = (Veiculo) obj;
         return placa.equalsIgnoreCase(other.getPlaca());
