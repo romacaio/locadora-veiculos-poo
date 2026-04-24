@@ -62,11 +62,11 @@ public class LocacaoController {
     }
 
     public Locacao buscarPorId(int idLocacao) {
-        Optional<Locacao> resultado = locacoes.stream()
+        Optional<Locacao> busca = locacoes.stream()
                 .filter(loc -> loc.getId() == idLocacao)
                 .findFirst();
 
-        return resultado.orElse(null);
+        return busca.orElse(null);
     }
 
     public List<Locacao> listarEmAberto() {

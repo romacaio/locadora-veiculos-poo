@@ -1,5 +1,6 @@
 package com.github.romacaio.view;
 
+import com.github.romacaio.controller.ClienteController;
 import com.github.romacaio.controller.LocacaoController;
 import com.github.romacaio.controller.VeiculoController;
 import com.github.romacaio.dao.ClienteDao;
@@ -20,6 +21,7 @@ public class Test {
         LocacaoDao locacaoDao = new LocacaoDao();
         LocacaoController locacaoController = new LocacaoController();
         VeiculoController veiculoController = new VeiculoController();
+        ClienteController clienteController = new ClienteController();
 
         List<Veiculo> veiculos = new ArrayList<>(List.of(
                 new Carro("Gol", "ABC123", 2020, Status.DISPONIVEL),
@@ -33,18 +35,21 @@ public class Test {
 
         ));
 
+        // VeiculoDao
         veiculoDao.salvar(veiculos);
         List<Veiculo> veiculosLoaded = veiculoDao.carregar();
         veiculosLoaded.forEach(System.out::println);
 
         System.out.println("-".repeat(30));
 
+        // ClienteDao
         clienteDao.salvar(clientes);
         List<Cliente> clientesLoaded = clienteDao.carregar();
         clientesLoaded.forEach(System.out::println);
 
         System.out.println("-".repeat(30));
 
+        // LocacaoDao
         List<Locacao> locacoes = List.of(
                 new Locacao(1, clientesLoaded.get(0), veiculosLoaded.get(0),
                         LocalDate.now(), LocalDate.now().plusDays(3))
@@ -56,14 +61,22 @@ public class Test {
 
         System.out.println("-".repeat(30));
 
+        // LocacaoController
         locacaoController.registrarLocacao(clientes.get(1), veiculos.get(1), 3);
         locacaoController.getLocacoes().forEach(System.out::println);
 
         System.out.println("-".repeat(30));
 
+        // VeiculoController
         veiculoController.cadastrarVeiculo(new Carro("Gol", "ABC123", 2020, Status.DISPONIVEL));
         veiculoController.listarLocados().forEach(System.out::println);
         veiculoController.listarDisponiveis().forEach(System.out::println);
+
+        System.out.println("-".repeat(30));
+
+        // ClienteController
+        clienteController.cadastrarCliente(new Cliente("João", "123", "9999", "email@email.com"));
+        clienteController.getClientes().forEach(System.out::println);
     }
 }
 

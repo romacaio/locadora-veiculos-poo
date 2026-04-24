@@ -19,7 +19,7 @@ public class Cliente {
         if (this == obj) return true;
         if (!this.getClass().equals(obj.getClass())) return false;
         Cliente other = (Cliente) obj;
-        return cpf.equals(other.getCpf());
+        return cpf.equalsIgnoreCase(other.getCpf());
     }
 
     @Override
