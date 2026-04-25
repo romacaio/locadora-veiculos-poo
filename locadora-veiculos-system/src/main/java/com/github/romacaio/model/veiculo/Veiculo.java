@@ -6,10 +6,15 @@ public abstract class Veiculo {
     private int ano;
     private Status status;
 
-    public Veiculo(String modelo, String placa, int ano, Status status) {
+    public Veiculo(String modelo, String placa, int ano) {
         this.modelo = modelo;
         this.placa = placa;
         this.ano = ano;
+        this.status = Status.DISPONIVEL;
+    }
+
+    public Veiculo(String modelo, String placa, int ano, Status status) {
+        this(modelo, placa, ano);
         this.status = status;
     }
 

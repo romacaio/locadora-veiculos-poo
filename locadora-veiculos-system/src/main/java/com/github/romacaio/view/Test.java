@@ -26,7 +26,7 @@ public class Test {
         UsuarioDao usuarioDao = new UsuarioDao();
         LocacaoController locacaoController = new LocacaoController();
         VeiculoController veiculoController = new VeiculoController();
-        ClienteController clienteController = new ClienteController();
+        ClienteController clienteController = new ClienteController(locacaoController);
         UsuarioController usuarioController = new UsuarioController();
 
         List<Veiculo> veiculos = new ArrayList<>(List.of(

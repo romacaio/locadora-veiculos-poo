@@ -44,12 +44,6 @@ public class UsuarioController {
         return usuarioLogado;
     }
 
-    public void verificarAdmin() {
-        if (!isAdmin()) {
-            throw new SecurityException("Acesso restrito a usuários (ADMIN)");
-        }
-    }
-
     public boolean isAdmin() {
         return usuarioLogado != null
                 && usuarioLogado.getTipo() == TipoUsuario.ADMIN;

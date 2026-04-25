@@ -7,6 +7,7 @@ import com.github.romacaio.model.pagamento.MetodoPagamento;
 import com.github.romacaio.model.pagamento.Pagamento;
 import com.github.romacaio.model.veiculo.Status;
 import com.github.romacaio.model.veiculo.Veiculo;
+import com.github.romacaio.service.LocacaoService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,10 +18,12 @@ import java.util.function.Predicate;
 public class LocacaoController {
     private LocacaoDao locacaoDao;
     private List<Locacao> locacoes;
+    private LocacaoService locacaoService;
 
     public LocacaoController() {
         this.locacaoDao = new LocacaoDao();
         this.locacoes = locacaoDao.carregar();
+        this.locacaoService = new LocacaoService();
     }
 
     public int gerarNovoId() {
@@ -31,14 +34,19 @@ public class LocacaoController {
     }
 
     public void registrarLocacao(Cliente cliente, Veiculo veiculo, int dias) {
-        if (veiculo.getStatus() != Status.DISPONIVEL) {
-            throw new IllegalStateException("Veículo não está disponível");
+        locacaoService.validarVeiculoDisponivel(veiculo);
+        locacaoService.validarCliente(cliente);
+
+        if (dias < 0) {
+            throw new IllegalArgumentException("A quantidade de dias deve ser maior que zero");
         }
 
         int id = gerarNovoId();
         LocalDate dataRetirada = LocalDate.now();
         LocalDate dataPrevistaDevolucao = dataRetirada.plusDays(dias);
         Locacao locacao = new Locacao(id, cliente, veiculo, dataRetirada, dataPrevistaDevolucao);
+
+        locacaoService.validarDatasLocacao(dataRetirada, dataPrevistaDevolucao);
 
         veiculo.setStatus(Status.LOCADO);
         locacoes.add(locacao);
@@ -50,6 +58,7 @@ public class LocacaoController {
         if (locacao == null) {
             throw new IllegalArgumentException("Locacão não econtrada");
         }
+        locacaoService.validarDatasDevolucao(locacao.getDataRetirada(), locacao.getDataDevolucao());
 
         locacao.registrarDevolucao(LocalDate.now());
 

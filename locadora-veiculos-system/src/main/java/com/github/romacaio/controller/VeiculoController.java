@@ -3,6 +3,7 @@ package com.github.romacaio.controller;
 import com.github.romacaio.dao.VeiculoDao;
 import com.github.romacaio.model.veiculo.Status;
 import com.github.romacaio.model.veiculo.Veiculo;
+import com.github.romacaio.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,10 @@ public class VeiculoController {
     }
 
     public void cadastrarVeiculo(Veiculo veiculo) {
+        if (!Validator.isPlacaValida(veiculo.getPlaca())) {
+            throw new IllegalArgumentException("Placa inválida");
+        }
+
         boolean existe = veiculos.stream()
                 .anyMatch(v -> v.equals(veiculo));
 
@@ -38,7 +43,7 @@ public class VeiculoController {
         }
 
         if (veiculo.getStatus() == Status.LOCADO) {
-            throw new IllegalArgumentException("Não é possívei remover o veículo locado");
+            throw new IllegalStateException("Não é possívei remover o veículo locado");
         }
 
         veiculos.remove(veiculo);
