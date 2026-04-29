@@ -29,6 +29,10 @@ public class ClienteController {
             throw new IllegalArgumentException("CPF inválido");
         }
 
+        if (!Validator.isTelefoneValido(cliente.getTelefone())) {
+            throw new IllegalArgumentException("Telefone inválido");
+        }
+
         if (!Validator.isEmailValido(cliente.getEmail())) {
             throw new IllegalArgumentException("Email inválido");
         }
@@ -41,7 +45,7 @@ public class ClienteController {
         }
 
         clientes.add(cliente);
-        clienteDao.carregar();
+        clienteDao.salvar(clientes);
     }
 
     public void removerCliente(String cpf) {

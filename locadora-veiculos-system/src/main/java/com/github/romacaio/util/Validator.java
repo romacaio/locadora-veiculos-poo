@@ -3,14 +3,17 @@ package com.github.romacaio.util;
 public class Validator {
 
     public static boolean isNomeValido(String nome) {
-        return nome.isBlank()
+        return !nome.isBlank()
                 && nome.length() > 3
                 && nome.matches("(?<Nome>^[A-Za-z-A-ÿ]+)(?<sobreNome> [A-Za-z-A-ÿ]+)*$");
-
     }
 
     public static boolean isEmailValido(String email) {
         return email.matches("(^\\w+)(@\\w+)(\\.[a-zA-Z]+)+$");
+    }
+
+    public static boolean isTelefoneValido(String telefone) {
+        return telefone.matches("^\\d{10}");
     }
 
     public static boolean isPlacaValida(String placa) {
