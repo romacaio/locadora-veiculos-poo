@@ -5,6 +5,8 @@ import com.github.romacaio.model.veiculo.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.Set;
 
 public class TelaCadastroVeiculo extends JFrame {
     private VeiculoController veiculoController;
@@ -32,7 +34,7 @@ public class TelaCadastroVeiculo extends JFrame {
         this.campoPlaca = new JTextField();
         this.campoModelo = new JTextField();
         this.campoAno = new JTextField();
-        this.comboTipo = new JComboBox<>(new String[]{"Carro", "Moto", "Caminhão"});
+        this.comboTipo = new JComboBox<>(new String[]{"Carro", "Caminhão", "Moto"});
 
         this.areaVeiculos = new JTextArea();
         areaVeiculos.setEditable(false);
@@ -86,12 +88,16 @@ public class TelaCadastroVeiculo extends JFrame {
         panelAreaVeiculos.setLayout(new BoxLayout(panelAreaVeiculos, BoxLayout.Y_AXIS));
         panel.add(panelAreaVeiculos, BorderLayout.EAST);
 
+        JLabel labelTitulo = new JLabel("Veículos cadastrados");
+        panelAreaVeiculos.add(labelTitulo);
+
+        panelAreaVeiculos.add(Box.createVerticalStrut(5));
+
         jScrollPane.setMaximumSize(new Dimension(200, 250));
         jScrollPane.setPreferredSize(new Dimension(200, 250));
-        jScrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        jScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelAreaVeiculos.add(Box.createVerticalStrut(5));
         panelAreaVeiculos.add(jScrollPane);
-
 
         setSize(400, 400);
         setLocationRelativeTo(null);
@@ -149,7 +155,17 @@ public class TelaCadastroVeiculo extends JFrame {
     }
 
     public void removerVeiculo() {
+        String placa = JOptionPane.showInputDialog(this, "Digite a placa do cliente para remover:");
+        if (placa == null || placa.isEmpty()) return;
 
+        try {
+            veiculoController.removerVeiculo(placa);
+            JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
+            atualizarListaVeiculos();
+
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void atualizarListaVeiculos() {
@@ -158,6 +174,7 @@ public class TelaCadastroVeiculo extends JFrame {
         if (veiculoController.getVeiculos().isEmpty()) {
             sb.append("Sem veículos cadastrados");
             areaVeiculos.setText(sb.toString());
+
             return;
         }
 

@@ -22,11 +22,14 @@ public class TelaCadastroCliente extends JFrame {
         this.clienteController = new ClienteController(locacaoController);
 
         setTitle("Cadastro cliente");
-        setLayout(new BorderLayout());
 
-        JPanel panelFormulario = new JPanel(new GridLayout(5, 2, 10, 10));
-        panelFormulario.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 40));
-        add(BorderLayout.CENTER, panelFormulario);
+        JPanel panel = new JPanel(new BorderLayout());
+        add(panel);
+
+        JPanel panelFormulario = new JPanel();
+        panelFormulario.setLayout(new BoxLayout(panelFormulario, BoxLayout.Y_AXIS));
+        panelFormulario.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        panel.add(panelFormulario, BorderLayout.WEST);
 
         this.campoNome = new JTextField();
         this.campoCpf = new JTextField();
@@ -36,23 +39,37 @@ public class TelaCadastroCliente extends JFrame {
         this.areaClientes = new JTextArea();
         areaClientes.setEditable(false);
         JScrollPane jScrollPane = new JScrollPane(areaClientes);
-        jScrollPane.setPreferredSize(new Dimension(200, 100));
         atualizarListaClientes();
 
+        configurarCampo(campoNome);
+        configurarCampo(campoCpf);
+        configurarCampo(campoTelefone);
+        configurarCampo(campoEmail);
+
         panelFormulario.add(new JLabel("Nome:"));
+        panelFormulario.add(Box.createVerticalStrut(5));
         panelFormulario.add(campoNome);
 
+        panelFormulario.add(Box.createVerticalStrut(15));
+
         panelFormulario.add(new JLabel("CPF:"));
+        panelFormulario.add(Box.createVerticalStrut(5));
         panelFormulario.add(campoCpf);
 
+        panelFormulario.add(Box.createVerticalStrut(15));
+
         panelFormulario.add(new JLabel("Telefone:"));
+        panelFormulario.add(Box.createVerticalStrut(5));
         panelFormulario.add(campoTelefone);
 
+        panelFormulario.add(Box.createVerticalStrut(15));
+
         panelFormulario.add(new JLabel("Email:"));
+        panelFormulario.add(Box.createVerticalStrut(5));
         panelFormulario.add(campoEmail);
 
         JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
-        add(BorderLayout.SOUTH, panelInferior);
+        panel.add(panelInferior, BorderLayout.SOUTH);
 
         JButton botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.setBackground(new Color(0x144202));
@@ -64,16 +81,33 @@ public class TelaCadastroCliente extends JFrame {
         botaoRemover.setForeground(Color.WHITE);
         panelInferior.add(botaoRemover);
 
-        botaoCadastrar.addActionListener(event -> cadastrarCliente());
-        botaoRemover.addActionListener(event -> removerCliente());
+        JPanel panelAreaClientes = new JPanel();
+        panelAreaClientes.setLayout(new BoxLayout(panelAreaClientes, BoxLayout.Y_AXIS));
+        panel.add(panelAreaClientes, BorderLayout.EAST);
 
-        panelInferior.add(jScrollPane);
+        JLabel labelTitulo = new JLabel("Clientes cadastrados");
+        panelAreaClientes.add(labelTitulo);
 
-        setSize(480, 320);
+        panelAreaClientes.add(Box.createVerticalStrut(5));
+
+        jScrollPane.setMaximumSize(new Dimension(200, 250));
+        jScrollPane.setPreferredSize(new Dimension(200, 250));
+        jScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panelAreaClientes.add(Box.createVerticalStrut(5));
+        panelAreaClientes.add(jScrollPane);
+
+
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void configurarCampo(JComponent component) {
+        component.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        component.setPreferredSize(new Dimension(120, 30));
+        component.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
     public void cadastrarCliente() {
@@ -91,6 +125,7 @@ public class TelaCadastroCliente extends JFrame {
             Cliente cliente = new Cliente(nome, cpf, telefone, email);
             clienteController.cadastrarCliente(cliente);
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+            atualizarListaClientes();
             limparCampos();
 
         } catch (IllegalArgumentException e) {
@@ -105,6 +140,7 @@ public class TelaCadastroCliente extends JFrame {
         try {
             clienteController.removerCliente(cpf);
             JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
+            atualizarListaClientes();
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -117,13 +153,12 @@ public class TelaCadastroCliente extends JFrame {
         if (clienteController.getClientes().isEmpty()) {
             sb.append("Sem clientes cadastrados");
             areaClientes.setText(sb.toString());
+
             return;
         }
 
         clienteController.getClientes()
-                .forEach(cliente -> sb.append(cliente.getNome())
-                        .append(": ")
-                        .append(cliente.getCpf())
+                .forEach(cliente -> sb.append(cliente.toString())
                         .append("\n"));
 
         areaClientes.setText(sb.toString());
