@@ -24,6 +24,10 @@ public class VeiculoController {
             throw new IllegalArgumentException("Placa inválida");
         }
 
+        if (!Validator.isAnoVeiculoValido(veiculo.getAno())) {
+            throw new IllegalArgumentException("Ano inválido");
+        }
+
         boolean existe = veiculos.stream()
                 .anyMatch(v -> v.equals(veiculo));
 

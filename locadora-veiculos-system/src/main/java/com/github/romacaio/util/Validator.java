@@ -1,5 +1,7 @@
 package com.github.romacaio.util;
 
+import java.time.Year;
+
 public class Validator {
 
     public static boolean isNomeValido(String nome) {
@@ -16,11 +18,19 @@ public class Validator {
         return telefone.matches("^\\d{10}");
     }
 
+    public static boolean isCpfValido(String cpf) {
+        return cpf.matches("\\d{11}");
+    }
+
     public static boolean isPlacaValida(String placa) {
         return placa.matches("^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$");
     }
 
-    public static boolean isCpfValido(String cpf) {
-        return cpf.matches("\\d{11}");
+    public static boolean isAnoVeiculoValido(int ano) {
+        Year anoInput = Year.of(ano);
+        Year anoAtual = Year.now();
+
+        return anoInput.isBefore(anoAtual) || anoInput.equals(anoAtual);
     }
+
 }

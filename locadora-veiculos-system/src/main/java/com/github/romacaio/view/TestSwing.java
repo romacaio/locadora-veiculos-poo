@@ -8,6 +8,7 @@ public class TestSwing {
         LocacaoController locacaoController = new LocacaoController();
         new ClienteController(locacaoController);
 
-        TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
+        //TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente();
+        TelaCadastroVeiculo telaCadastroVeiculo = new TelaCadastroVeiculo();
     }
 }

@@ -32,8 +32,8 @@ public class TelaCadastroCliente extends JFrame {
         this.campoCpf = new JTextField();
         this.campoTelefone = new JTextField();
         this.campoEmail = new JTextField();
-        this.areaClientes = new JTextArea();
 
+        this.areaClientes = new JTextArea();
         areaClientes.setEditable(false);
         JScrollPane jScrollPane = new JScrollPane(areaClientes);
         jScrollPane.setPreferredSize(new Dimension(200, 100));
@@ -50,7 +50,6 @@ public class TelaCadastroCliente extends JFrame {
 
         panelFormulario.add(new JLabel("Email:"));
         panelFormulario.add(campoEmail);
-
 
         JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
         add(BorderLayout.SOUTH, panelInferior);
@@ -115,12 +114,17 @@ public class TelaCadastroCliente extends JFrame {
     public void atualizarListaClientes() {
         StringBuilder sb = new StringBuilder();
 
+        if (clienteController.getClientes().isEmpty()) {
+            sb.append("Sem clientes cadastrados");
+            areaClientes.setText(sb.toString());
+            return;
+        }
+
         clienteController.getClientes()
                 .forEach(cliente -> sb.append(cliente.getNome())
                         .append(": ")
                         .append(cliente.getCpf())
                         .append("\n"));
-
 
         areaClientes.setText(sb.toString());
     }
