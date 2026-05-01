@@ -1,9 +1,16 @@
 [
   {
-    "modelo": " Toyota Corolla",
-    "placa": "ABC2123",
-    "ano": 2024,
+    "modelo": "Hyundai HB20",
+    "placa": "FSD2D45",
+    "ano": 2020,
     "status": "DISPONIVEL",
     "tipo": "Carro"
+  },
+  {
+    "modelo": "Honda Pop 110i",
+    "placa": "LTS1A24",
+    "ano": 2024,
+    "status": "DISPONIVEL",
+    "tipo": "Moto"
   }
 ]

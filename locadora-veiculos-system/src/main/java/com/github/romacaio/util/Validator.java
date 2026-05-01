@@ -23,7 +23,7 @@ public class Validator {
     }
 
     public static boolean isPlacaValida(String placa) {
-        return placa.matches("^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$");
+        return placa.matches("^[A-Z-a-z]{3}[0-9][A-Za-z0-9][0-9]{2}$");
     }
 
     public static boolean isAnoVeiculoValido(int ano) {

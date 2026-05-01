@@ -68,4 +68,8 @@ public class Cliente {
                 "\n Email: " + email +
                 "\n}";
     }
+
+    public String exibirResumo() {
+        return nome + " - " + cpf;
+    }
 }

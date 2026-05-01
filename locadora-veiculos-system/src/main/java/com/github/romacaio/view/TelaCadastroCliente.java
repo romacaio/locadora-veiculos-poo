@@ -74,11 +74,13 @@ public class TelaCadastroCliente extends JFrame {
         JButton botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.setBackground(new Color(0x144202));
         botaoCadastrar.setForeground(Color.WHITE);
+        botaoCadastrar.addActionListener(event -> cadastrarCliente());
         panelInferior.add(botaoCadastrar);
 
         JButton botaoRemover = new JButton("Remover");
         botaoRemover.setBackground(Color.red);
         botaoRemover.setForeground(Color.WHITE);
+        botaoRemover.addActionListener(event -> removerCliente());
         panelInferior.add(botaoRemover);
 
         JPanel panelAreaClientes = new JPanel();

@@ -75,4 +75,8 @@ public abstract class Veiculo {
                 "\n}";
 
     }
+
+    public String exibirResumo() {
+        return modelo + " - " + placa;
+    }
 }

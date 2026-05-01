@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "Elias Rodrigues",
+    "cpf": "06520458388",
+    "telefone": "8399914779",
+    "email": "elias20@gmail.com"
+  },
+  {
+    "nome": "Caio César",
+    "cpf": "03520158784",
+    "telefone": "8392916172",
+    "email": "caio12@gmail.com"
+  },
+  {
+    "nome": "Júlio Martins",
+    "cpf": "04460148722",
+    "telefone": "8392316270",
+    "email": "juliom14@gmail.com"
+  },
+  {
+    "nome": "Maria das Neves",
+    "cpf": "04420348711",
+    "telefone": "8399015240",
+    "email": "nevesmaria@gmail.com"
+  },
+  {
+    "nome": "Henrique Pires",
+    "cpf": "09357628387",
+    "telefone": "8399511043",
+    "email": "henriquep67@gmail.com"
+  }
+]

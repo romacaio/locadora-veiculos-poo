@@ -5,8 +5,6 @@ import com.github.romacaio.model.veiculo.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-import java.util.Set;
 
 public class TelaCadastroVeiculo extends JFrame {
     private VeiculoController veiculoController;
@@ -155,12 +153,12 @@ public class TelaCadastroVeiculo extends JFrame {
     }
 
     public void removerVeiculo() {
-        String placa = JOptionPane.showInputDialog(this, "Digite a placa do cliente para remover:");
+        String placa = JOptionPane.showInputDialog(this, "Digite a placa do veículo para remover:");
         if (placa == null || placa.isEmpty()) return;
 
         try {
             veiculoController.removerVeiculo(placa);
-            JOptionPane.showMessageDialog(this, "Cliente removido com sucesso!");
+            JOptionPane.showMessageDialog(this, "Veículo removido com sucesso!");
             atualizarListaVeiculos();
 
         } catch (IllegalArgumentException | IllegalStateException e) {
