@@ -19,11 +19,13 @@ public class LocacaoController {
     private LocacaoDao locacaoDao;
     private List<Locacao> locacoes;
     private LocacaoService locacaoService;
+    private VeiculoController veiculoController;
 
-    public LocacaoController() {
+    public LocacaoController(VeiculoController veiculoController) {
         this.locacaoDao = new LocacaoDao();
         this.locacoes = locacaoDao.carregar();
         this.locacaoService = new LocacaoService();
+        this.veiculoController = veiculoController;
     }
 
     public int gerarNovoId() {
@@ -44,11 +46,10 @@ public class LocacaoController {
         int id = gerarNovoId();
         LocalDate dataRetirada = LocalDate.now();
         LocalDate dataPrevistaDevolucao = dataRetirada.plusDays(dias);
+        locacaoService.validarDatasLocacao(dataRetirada, dataPrevistaDevolucao);
         Locacao locacao = new Locacao(id, cliente, veiculo, dataRetirada, dataPrevistaDevolucao);
 
-        locacaoService.validarDatasLocacao(dataRetirada, dataPrevistaDevolucao);
-
-        veiculo.setStatus(Status.LOCADO);
+        veiculoController.atualizarStatusVeiculo(veiculo, Status.LOCADO);
         locacoes.add(locacao);
         locacaoDao.salvar(locacoes);
     }

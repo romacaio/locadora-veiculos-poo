@@ -39,9 +39,12 @@ public class LocacaoService {
     }
 
     public void validarVeiculoDisponivel(Veiculo veiculo) {
+        if (veiculo == null) {
+            throw new IllegalArgumentException("Veículo inválido");
+        }
+
         if (veiculo.getStatus() == Status.LOCADO) {
             throw new IllegalStateException("O veículo já está locado");
         }
     }
-
 }

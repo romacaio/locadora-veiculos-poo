@@ -16,8 +16,8 @@ public class TelaCadastroVeiculo extends JFrame {
     private JTextArea areaVeiculos;
 
 
-    public TelaCadastroVeiculo() {
-        this.veiculoController = new VeiculoController();
+    public TelaCadastroVeiculo(VeiculoController veiculoController) {
+        this.veiculoController = veiculoController;
 
         setTitle("Cadastro veículo");
 

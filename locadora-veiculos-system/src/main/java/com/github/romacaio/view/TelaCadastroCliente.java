@@ -17,9 +17,8 @@ public class TelaCadastroCliente extends JFrame {
     private JTextField campoEmail;
     private JTextArea areaClientes;
 
-    public TelaCadastroCliente() {
-        LocacaoController locacaoController = new LocacaoController();
-        this.clienteController = new ClienteController(locacaoController);
+    public TelaCadastroCliente(ClienteController clienteController) {
+        this.clienteController = clienteController;
 
         setTitle("Cadastro cliente");
 

@@ -7,7 +7,6 @@ import com.github.romacaio.model.cliente.Cliente;
 import com.github.romacaio.model.veiculo.Veiculo;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
 import java.util.List;
 
@@ -20,13 +19,15 @@ public class TelaCadastroLocacao extends JFrame {
     private JTextField campoPlaca;
     private JSpinner spinnerDias;
     private JList<String> listClientes;
+    private DefaultListModel<String> modelClientes;
     private JList<String> listVeiculos;
-    private JList<String> listLocacoes;
+    private DefaultListModel<String> modelVeiculos;
+    private JTextArea areaLocacoes;
 
-    public TelaCadastroLocacao() {
-        this.locacaoController = new LocacaoController();
-        this.clienteController = new ClienteController(locacaoController);
-        this.veiculoController = new VeiculoController();
+    public TelaCadastroLocacao(LocacaoController locacaoController, ClienteController clienteController, VeiculoController veiculoController) {
+        this.locacaoController = locacaoController;
+        this.clienteController = clienteController;
+        this.veiculoController = veiculoController;
 
         setTitle("Registrar locação");
 
@@ -41,6 +42,8 @@ public class TelaCadastroLocacao extends JFrame {
         this.campoCPF = new JTextField();
         this.campoPlaca = new JTextField();
         this.listClientes = new JList<>();
+        this.areaLocacoes = new JTextArea();
+        areaLocacoes.setEditable(false);
 
         this.spinnerDias = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
         JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinnerDias);
@@ -84,9 +87,9 @@ public class TelaCadastroLocacao extends JFrame {
 
         panelAreas.add(Box.createVerticalStrut(5));
 
-        DefaultListModel<String> modelClientes = new DefaultListModel<>();
+        this.modelClientes = new DefaultListModel<>();
         this.listClientes = new JList<>(modelClientes);
-        modelClientes.addAll(atualizarListaClientes());
+        atualizarListaClientes();
         JScrollPane jscrollPane1 = new JScrollPane(listClientes);
 
         configurarCampo(jscrollPane1);
@@ -97,15 +100,27 @@ public class TelaCadastroLocacao extends JFrame {
 
         panelAreas.add(Box.createVerticalStrut(5));
 
-        DefaultListModel<String> modelVeiculos = new DefaultListModel<>();
+        this.modelVeiculos = new DefaultListModel<>();
         this.listVeiculos = new JList<>(modelVeiculos);
-        modelVeiculos.addAll(atualizarListaVeiculos());
+        atualizarListaVeiculos();
         JScrollPane jscrollPane2 = new JScrollPane(listVeiculos);
 
         configurarCampo(jscrollPane2);
         panelAreas.add(jscrollPane2);
 
-        setSize(400, 400);
+        JLabel labelLocacoes = new JLabel("locações registradas");
+        panelAreas.add(labelLocacoes);
+
+        panelAreas.add(Box.createVerticalStrut(5));
+
+        JScrollPane jScrollPane3 = new JScrollPane(areaLocacoes);
+        jScrollPane3.setMaximumSize(new Dimension(200, 250));
+        jScrollPane3.setPreferredSize(new Dimension(200, 250));
+        jScrollPane3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panelAreas.add(jScrollPane3);
+        atualizarListaLocacoes();
+
+        setSize(400, 500);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -125,18 +140,74 @@ public class TelaCadastroLocacao extends JFrame {
     }
 
     public void registrarLocacao() {
+        String cpf = campoCPF.getText();
+        String placa = campoPlaca.getText();
+        int dias = Integer.parseInt(spinnerDias.getValue().toString());
 
+        if (cpf.isEmpty() || placa.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            Cliente cliente = clienteController.buscarPorCpf(cpf);
+            Veiculo veiculo = veiculoController.buscarPorPlaca(placa);
+            locacaoController.registrarLocacao(cliente, veiculo, dias);
+            JOptionPane.showMessageDialog(this, "Locação registrada com sucesso!");
+            atualizarListaLocacoes();
+            limparCampos();
+            atualizarListaVeiculos();
+
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    public List<String> atualizarListaClientes() {
-        return clienteController.getClientes().stream()
+    public void atualizarListaLocacoes() {
+        StringBuilder sb = new StringBuilder();
+        if (locacaoController.getLocacoes().isEmpty()) {
+            sb.append("Sem locacações registradas");
+            areaLocacoes.setText(sb.toString());
+
+            return;
+        }
+
+        locacaoController.getLocacoes()
+                .forEach(loc -> sb.append(loc.toString())
+                        .append("\n")
+                );
+
+        areaLocacoes.setText(sb.toString());
+    }
+
+    public void atualizarListaClientes() {
+        modelClientes.clear();
+
+        List<String> list = clienteController.getClientes().stream()
                 .map(Cliente::exibirResumo)
                 .toList();
+
+        if (list.isEmpty()) {
+            modelClientes.addElement("Sem clientes cadastrados");
+            return;
+        }
+        modelClientes.addAll(list);
     }
 
-    public List<String> atualizarListaVeiculos() {
-        return veiculoController.getVeiculos().stream()
+    public void atualizarListaVeiculos() {
+        modelVeiculos.clear();
+        List<String> list = veiculoController.listarDisponiveis().stream()
                 .map(Veiculo::exibirResumo)
                 .toList();
+
+        if (list.isEmpty()) {
+            modelVeiculos.addElement("Sem veículos disponíveis");
+        }
+        modelVeiculos.addAll(list);
+    }
+
+    public void limparCampos() {
+        this.campoCPF.setText("");
+        this.campoPlaca.setText("");
+        this.spinnerDias.setValue(1);
     }
 }

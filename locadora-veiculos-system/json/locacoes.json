@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "cliente": {
+      "nome": "Elias Rodrigues",
+      "cpf": "06520458388",
+      "telefone": "8399914779",
+      "email": "elias20@gmail.com"
+    },
+    "veiculo": {
+      "modelo": "Hyundai HB20",
+      "placa": "FSD2D45",
+      "ano": 2020,
+      "status": "LOCADO",
+      "tipo": "Carro"
+    },
+    "dataRetirada": "04/05/2026",
+    "dataPrevistaDevolucao": "08/05/2026"
+  },
+  {
+    "id": 2,
+    "cliente": {
+      "nome": "Júlio Martins",
+      "cpf": "04460148722",
+      "telefone": "8392316270",
+      "email": "juliom14@gmail.com"
+    },
+    "veiculo": {
+      "modelo": "Honda Pop 110i",
+      "placa": "LTS1A24",
+      "ano": 2024,
+      "status": "LOCADO",
+      "tipo": "Moto"
+    },
+    "dataRetirada": "04/05/2026",
+    "dataPrevistaDevolucao": "12/05/2026"
+  }
+]

@@ -54,6 +54,10 @@ public class VeiculoController {
         veiculoDao.salvar(veiculos);
     }
 
+    public void atualizarStatusVeiculo(Veiculo veiculo, Status status) {
+        veiculo.setStatus(status);
+        veiculoDao.salvar(veiculos);
+    }
 
     public Veiculo buscarPorPlaca(String placa) {
         Optional<Veiculo> busca = veiculos.stream()
