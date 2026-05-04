@@ -54,21 +54,26 @@ public class LocacaoController {
         locacaoDao.salvar(locacoes);
     }
 
-    public double devolverVeiculo(int idLocacao, MetodoPagamento metodoPagamento) {
+    public Pagamento devolverVeiculo(int idLocacao, MetodoPagamento metodoPagamento) {
         Locacao locacao = buscarPorId(idLocacao);
         if (locacao == null) {
             throw new IllegalArgumentException("Locacão não econtrada");
         }
-        locacaoService.validarDatasDevolucao(locacao.getDataRetirada(), locacao.getDataDevolucao());
 
+        if (locacao.getDataDevolucao() != null) {
+            throw new IllegalStateException("Locacão já teve a devolução registrada");
+        }
+
+        locacaoService.validarDatasDevolucao(locacao.getDataRetirada(), locacao.getDataDevolucao());
         locacao.registrarDevolucao(LocalDate.now());
 
-        double valor = locacao.calcularValorTotal();
-        Pagamento pagamento = new Pagamento(gerarNovoId(), locacao.getId(), valor, metodoPagamento);
+        double valorTotal = locacao.calcularValorTotal();
+        double valorMulta = locacao.calcularValorMulta();
+        Pagamento pagamento = new Pagamento(gerarNovoId(), locacao.getId(), valorMulta, valorTotal, metodoPagamento);
         locacao.setPagamento(pagamento);
 
         locacaoDao.salvar(locacoes);
-        return valor;
+        return pagamento;
     }
 
     public Locacao buscarPorId(int idLocacao) {

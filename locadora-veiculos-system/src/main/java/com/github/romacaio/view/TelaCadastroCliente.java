@@ -2,7 +2,6 @@ package com.github.romacaio.view;
 
 
 import com.github.romacaio.controller.ClienteController;
-import com.github.romacaio.controller.LocacaoController;
 import com.github.romacaio.model.cliente.Cliente;
 
 import javax.swing.*;
@@ -96,7 +95,6 @@ public class TelaCadastroCliente extends JFrame {
         jScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelAreaClientes.add(Box.createVerticalStrut(5));
         panelAreaClientes.add(jScrollPane);
-
 
         setSize(400, 400);
         setLocationRelativeTo(null);

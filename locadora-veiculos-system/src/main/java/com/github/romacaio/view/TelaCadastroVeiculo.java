@@ -86,11 +86,12 @@ public class TelaCadastroVeiculo extends JFrame {
         panelAreaVeiculos.setLayout(new BoxLayout(panelAreaVeiculos, BoxLayout.Y_AXIS));
         panel.add(panelAreaVeiculos, BorderLayout.EAST);
 
+        panelAreaVeiculos.add(Box.createVerticalStrut(5));
+
         JLabel labelTitulo = new JLabel("Veículos cadastrados");
         panelAreaVeiculos.add(labelTitulo);
 
         panelAreaVeiculos.add(Box.createVerticalStrut(5));
-
         jScrollPane.setMaximumSize(new Dimension(200, 250));
         jScrollPane.setPreferredSize(new Dimension(200, 250));
         jScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -104,10 +105,11 @@ public class TelaCadastroVeiculo extends JFrame {
         setVisible(true);
     }
 
-    private void configurarCampo(JComponent componente) {
-        componente.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        componente.setPreferredSize(new Dimension(120, 30));
-        componente.setAlignmentX(Component.LEFT_ALIGNMENT);
+    private void configurarCampo(JComponent component) {
+
+        component.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        component.setPreferredSize(new Dimension(120, 30));
+        component.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
     public void cadastrarVeiculo() {

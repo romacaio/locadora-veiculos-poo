@@ -5,14 +5,16 @@ import java.time.LocalDate;
 public class Pagamento {
     private int id;
     private int idLocacao;
-    private double valor;
+    private double valorMulta;
+    private double valorTotal;
     private LocalDate dataPagamento;
     private MetodoPagamento metodoPagamento;
 
-    public Pagamento(int id, int idLocacao, double valor, MetodoPagamento metodoPagamento) {
+    public Pagamento(int id, int idLocacao, double valorMulta, double valorTotal, MetodoPagamento metodoPagamento) {
         this.id = id;
         this.idLocacao = idLocacao;
-        this.valor = valor;
+        this.valorMulta = valorMulta;
+        this.valorTotal = valorTotal;
         this.dataPagamento = LocalDate.now();
         this.metodoPagamento = metodoPagamento;
     }
@@ -25,28 +27,19 @@ public class Pagamento {
         return idLocacao;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValorMulta() {
+        return valorMulta;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
     public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(LocalDate dataPagamento) {
-        this.dataPagamento = dataPagamento;
-    }
-
     public MetodoPagamento getMetodoPagamento() {
         return metodoPagamento;
     }
-
-    public void setMetodoPagamento(MetodoPagamento metodoPagamento) {
-        this.metodoPagamento = metodoPagamento;
-    }
-
 }

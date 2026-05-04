@@ -30,13 +30,18 @@ public class Locacao {
     public double calcularValorTotal() {
         if (dataDevolucao == null) return 0;
         double valorBase = veiculo.calcularCustoLocacao((int) getDias());
-        double multa = 0;
+        double multa = calcularValorMulta();
 
+        return valorBase + multa;
+    }
+
+    public double calcularValorMulta() {
+        double multa = 0;
         if (isAtrasado()) {
             long diasAtraso = dataPrevistaDevolucao.until(dataDevolucao, ChronoUnit.DAYS);
             multa = diasAtraso * (veiculo.calcularCustoLocacao(1) * PORCENTUAL_MULTA_ATRASO);
         }
-        return valorBase + multa;
+        return multa;
     }
 
     public void registrarDevolucao(LocalDate dataDevolucao) {
@@ -51,7 +56,7 @@ public class Locacao {
         return dataDevolucao.isAfter(dataPrevistaDevolucao);
     }
 
-    private long getDias() {
+    public long getDias() {
         long dias = dataRetirada.until(dataDevolucao, ChronoUnit.DAYS);
         return dias == 0 ? 1 : dias;
     }

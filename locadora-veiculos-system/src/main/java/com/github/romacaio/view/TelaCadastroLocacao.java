@@ -127,15 +127,15 @@ public class TelaCadastroLocacao extends JFrame {
         setVisible(true);
     }
 
-    private void configurarCampo(JComponent componente) {
-        if (componente.getClass() == JScrollPane.class) {
-            componente.setMaximumSize(new Dimension(200, 80));
-            componente.setPreferredSize(new Dimension(200, 80));
-            componente.setAlignmentX(Component.LEFT_ALIGNMENT);
+    private void configurarCampo(JComponent component) {
+        if (component.getClass() == JScrollPane.class) {
+            component.setMaximumSize(new Dimension(200, 80));
+            component.setPreferredSize(new Dimension(200, 80));
+            component.setAlignmentX(Component.LEFT_ALIGNMENT);
         } else {
-            componente.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-            componente.setPreferredSize(new Dimension(120, 30));
-            componente.setAlignmentX(Component.LEFT_ALIGNMENT);
+            component.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+            component.setPreferredSize(new Dimension(120, 30));
+            component.setAlignmentX(Component.LEFT_ALIGNMENT);
         }
     }
 
