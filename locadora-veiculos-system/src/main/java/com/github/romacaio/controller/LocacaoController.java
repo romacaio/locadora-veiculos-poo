@@ -64,8 +64,8 @@ public class LocacaoController {
             throw new IllegalStateException("Locacão já teve a devolução registrada");
         }
 
-        locacaoService.validarDatasDevolucao(locacao.getDataRetirada(), locacao.getDataDevolucao());
         locacao.registrarDevolucao(LocalDate.now());
+        locacaoService.validarDatasDevolucao(locacao.getDataRetirada(), locacao.getDataDevolucao());
 
         double valorTotal = locacao.calcularValorTotal();
         double valorMulta = locacao.calcularValorMulta();

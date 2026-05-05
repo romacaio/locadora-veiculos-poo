@@ -11,11 +11,20 @@
       "modelo": "Hyundai HB20",
       "placa": "FSD2D45",
       "ano": 2020,
-      "status": "LOCADO",
+      "status": "DISPONIVEL",
       "tipo": "Carro"
     },
-    "dataRetirada": "04/05/2026",
-    "dataPrevistaDevolucao": "08/05/2026"
+    "dataRetirada": "30/04/2026",
+    "dataPrevistaDevolucao": "04/05/2026",
+    "dataDevolucao": "04/05/2026",
+    "pagamento": {
+      "id": 3,
+      "idLocacao": 1,
+      "valorMulta": 0.0,
+      "valorTotal": 320.0,
+      "dataPagamento": "04/05/2026",
+      "metodoPagamento": "DINHEIRO"
+    }
   },
   {
     "id": 2,
@@ -29,10 +38,19 @@
       "modelo": "Honda Pop 110i",
       "placa": "LTS1A24",
       "ano": 2024,
-      "status": "LOCADO",
+      "status": "DISPONIVEL",
       "tipo": "Moto"
     },
     "dataRetirada": "04/05/2026",
-    "dataPrevistaDevolucao": "12/05/2026"
+    "dataPrevistaDevolucao": "12/05/2026",
+    "dataDevolucao": "05/05/2026",
+    "pagamento": {
+      "id": 3,
+      "idLocacao": 2,
+      "valorMulta": 0.0,
+      "valorTotal": 40.0,
+      "dataPagamento": "05/05/2026",
+      "metodoPagamento": "PIX"
+    }
   }
 ]

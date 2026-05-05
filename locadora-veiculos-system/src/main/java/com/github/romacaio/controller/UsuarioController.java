@@ -16,6 +16,7 @@ public class UsuarioController {
     public UsuarioController() {
         this.usuarioDao = new UsuarioDao();
         this.usuarios = usuarioDao.carregar();
+        inicializarAdminPadrao();
     }
 
     public void cadastrarUsuario(Usuario usuario) {
@@ -37,11 +38,22 @@ public class UsuarioController {
                 .findFirst();
 
         if (busca.isEmpty()) {
-            throw new IllegalArgumentException("UserName ou senha inválidos");
+            throw new IllegalArgumentException("Usuário ou senha inválidos");
         }
 
         this.usuarioLogado = busca.get();
         return usuarioLogado;
+    }
+
+    private void inicializarAdminPadrao() {
+        if (usuarios.isEmpty()) {
+            usuarios.add(
+                    new Usuario("admin", "123", TipoUsuario.ADMIN)
+            );
+
+            usuarioDao.salvar(usuarios);
+            usuarios = usuarioDao.carregar();
+        }
     }
 
     public boolean isAdmin() {

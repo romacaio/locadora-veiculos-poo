@@ -105,6 +105,9 @@ public class TelaDevolucaoVeiculo extends JFrame {
                     "\nMulta: R$ " + pagamento.getValorMulta() +
                     "\nTotal: R$ " + pagamento.getValorTotal());
 
+            atualizarListaLocacoes();
+            limparCampos();
+
         } catch (IllegalArgumentException | IllegalStateException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -119,7 +122,7 @@ public class TelaDevolucaoVeiculo extends JFrame {
             return;
         }
 
-        locacaoController.getLocacoes()
+        locacaoController.listarEmAberto()
                 .forEach(loc -> sb.append(loc.toString())
                         .append("\n")
                 );
