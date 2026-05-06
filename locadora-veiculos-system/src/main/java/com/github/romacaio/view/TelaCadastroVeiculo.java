@@ -6,7 +6,7 @@ import com.github.romacaio.model.veiculo.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaCadastroVeiculo extends JFrame {
+public class TelaCadastroVeiculo extends JDialog {
     private VeiculoController veiculoController;
 
     private JTextField campoPlaca;
@@ -72,14 +72,15 @@ public class TelaCadastroVeiculo extends JFrame {
         JButton botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.setBackground(new Color(0x144202));
         botaoCadastrar.setForeground(Color.WHITE);
+        botaoCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelInferior.add(botaoCadastrar);
+        botaoCadastrar.addActionListener(event -> cadastrarVeiculo());
 
         JButton botaoRemover = new JButton("Remover");
         botaoRemover.setBackground(Color.red);
         botaoRemover.setForeground(Color.WHITE);
+        botaoRemover.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelInferior.add(botaoRemover);
-
-        botaoCadastrar.addActionListener(event -> cadastrarVeiculo());
         botaoRemover.addActionListener(event -> removerVeiculo());
 
         JPanel panelAreaVeiculos = new JPanel();
@@ -101,19 +102,17 @@ public class TelaCadastroVeiculo extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
     private void configurarCampo(JComponent component) {
-
         component.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         component.setPreferredSize(new Dimension(120, 30));
         component.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
-    public void cadastrarVeiculo() {
-
+    private void cadastrarVeiculo() {
         String placa = campoPlaca.getText();
         String modelo = campoModelo.getText();
         String ano = campoAno.getText();
@@ -154,7 +153,7 @@ public class TelaCadastroVeiculo extends JFrame {
         }
     }
 
-    public void removerVeiculo() {
+    private void removerVeiculo() {
         String placa = JOptionPane.showInputDialog(this, "Digite a placa do veículo para remover:");
         if (placa == null || placa.isEmpty()) return;
 
@@ -168,7 +167,7 @@ public class TelaCadastroVeiculo extends JFrame {
         }
     }
 
-    public void atualizarListaVeiculos() {
+    private void atualizarListaVeiculos() {
         StringBuilder sb = new StringBuilder();
 
         if (veiculoController.getVeiculos().isEmpty()) {
@@ -185,7 +184,7 @@ public class TelaCadastroVeiculo extends JFrame {
         areaVeiculos.setText(sb.toString());
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         this.campoPlaca.setText("");
         this.campoModelo.setText("");
         this.campoAno.setText("");

@@ -12,10 +12,6 @@ public class TestSwing {
         ClienteController clienteController = new ClienteController(locacaoController);
         UsuarioController usuarioController = new UsuarioController();
 
-        //TelaCadastroCliente telaCadastroCliente = new TelaCadastroCliente(clienteController);
-        //TelaCadastroVeiculo telaCadastroVeiculo = new TelaCadastroVeiculo(veiculoController);
-        //TelaCadastroLocacao telaCadastroLocacao = new TelaCadastroLocacao(locacaoController, clienteController, veiculoController);
-        //TelaDevolucaoVeiculo telaDevolucaoVeiculo = new TelaDevolucaoVeiculo(locacaoController);
-        TelaLogin telaLogin = new TelaLogin(usuarioController);
+        TelaLogin telaLogin = new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
     }
 }

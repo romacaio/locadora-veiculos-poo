@@ -1,19 +1,32 @@
 package com.github.romacaio.view;
 
+import com.github.romacaio.controller.ClienteController;
+import com.github.romacaio.controller.LocacaoController;
 import com.github.romacaio.controller.UsuarioController;
+import com.github.romacaio.controller.VeiculoController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class TelaLogin extends JFrame {
     private UsuarioController usuarioController;
+    private ClienteController clienteController;
+    private VeiculoController veiculoController;
+    private LocacaoController locacaoController;
 
     private JTextField campoUserName;
     private JPasswordField campoSenha;
 
-    public TelaLogin(UsuarioController usuarioController) {
+    public TelaLogin(
+            UsuarioController usuarioController,
+            ClienteController clienteController,
+            VeiculoController veiculoController,
+            LocacaoController locacaoController
+    ) {
         this.usuarioController = usuarioController;
+        this.clienteController = clienteController;
+        this.veiculoController = veiculoController;
+        this.locacaoController = locacaoController;
 
         setTitle("Login usuário");
 
@@ -55,6 +68,7 @@ public class TelaLogin extends JFrame {
         JButton botaoLogar = new JButton("Logar");
         botaoLogar.setBackground(new Color(0x144202));
         botaoLogar.setForeground(Color.WHITE);
+        botaoLogar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         botaoLogar.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoLogar.addActionListener(event -> logarUsuario());
         panelFormulario.add(botaoLogar);
@@ -66,14 +80,14 @@ public class TelaLogin extends JFrame {
         setVisible(true);
     }
 
-    public void configurarCampo(JComponent component) {
+    private void configurarCampo(JComponent component) {
         component.setMaximumSize(new Dimension(120, 30));
         component.setPreferredSize(new Dimension(120, 30));
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     }
 
-    public void logarUsuario() {
+    private void logarUsuario() {
         String usuario = campoUserName.getText();
         String senha = new String(campoSenha.getPassword());
 
@@ -85,14 +99,15 @@ public class TelaLogin extends JFrame {
         try {
             usuarioController.loginUsuario(usuario, senha);
             JOptionPane.showMessageDialog(this, "Usuário logado com sucesso!");
-            limparCampos();
+            new TelaPrincipal(usuarioController, clienteController, veiculoController, locacaoController);
+            dispose();
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         this.campoUserName.setText("");
         this.campoSenha.setText("");
     }

@@ -8,7 +8,7 @@ import com.github.romacaio.model.pagamento.Pagamento;
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaDevolucaoVeiculo extends JFrame {
+public class TelaDevolucaoVeiculo extends JDialog {
     private LocacaoController locacaoController;
 
     private JTextField campoIdLocacao;
@@ -53,6 +53,7 @@ public class TelaDevolucaoVeiculo extends JFrame {
         JButton botaoRegistrar = new JButton("Devolução");
         botaoRegistrar.setBackground(new Color(0x144202));
         botaoRegistrar.setForeground(Color.white);
+        botaoRegistrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         botaoRegistrar.addActionListener(event -> registrarDevolucao());
         panelFormulario.add(botaoRegistrar);
 
@@ -74,17 +75,17 @@ public class TelaDevolucaoVeiculo extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
-    public void configurarCampo(JComponent component) {
+    private void configurarCampo(JComponent component) {
         component.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         component.setPreferredSize(new Dimension(120, 30));
         component.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
-    public void registrarDevolucao() {
+    private void registrarDevolucao() {
         String idLocacao = campoIdLocacao.getText();
         MetodoPagamento metodoPagamento = MetodoPagamento.parse(comboBoxPagamento.getSelectedItem().toString());
 
@@ -113,7 +114,7 @@ public class TelaDevolucaoVeiculo extends JFrame {
         }
     }
 
-    public void atualizarListaLocacoes() {
+    private void atualizarListaLocacoes() {
         StringBuilder sb = new StringBuilder();
         if (locacaoController.listarEmAberto().isEmpty()) {
             sb.append("Sem locacações registradas");
@@ -130,7 +131,7 @@ public class TelaDevolucaoVeiculo extends JFrame {
         areaLocacoesAtivas.setText(sb.toString());
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         this.campoIdLocacao.setText("");
     }
 }

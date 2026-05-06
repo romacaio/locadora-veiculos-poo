@@ -7,7 +7,7 @@ import com.github.romacaio.model.cliente.Cliente;
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaCadastroCliente extends JFrame {
+public class TelaCadastroCliente extends JDialog {
     private ClienteController clienteController;
 
     private JTextField campoNome;
@@ -72,12 +72,14 @@ public class TelaCadastroCliente extends JFrame {
         JButton botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.setBackground(new Color(0x144202));
         botaoCadastrar.setForeground(Color.WHITE);
+        botaoCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         botaoCadastrar.addActionListener(event -> cadastrarCliente());
         panelInferior.add(botaoCadastrar);
 
         JButton botaoRemover = new JButton("Remover");
         botaoRemover.setBackground(Color.red);
         botaoRemover.setForeground(Color.WHITE);
+        botaoRemover.setCursor(new Cursor(Cursor.HAND_CURSOR));
         botaoRemover.addActionListener(event -> removerCliente());
         panelInferior.add(botaoRemover);
 
@@ -99,17 +101,17 @@ public class TelaCadastroCliente extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
-    public void configurarCampo(JComponent component) {
+    private void configurarCampo(JComponent component) {
         component.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         component.setPreferredSize(new Dimension(120, 30));
         component.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
-    public void cadastrarCliente() {
+    private void cadastrarCliente() {
         String nome = campoNome.getText();
         String cpf = campoCpf.getText();
         String telefone = campoTelefone.getText();
@@ -132,7 +134,7 @@ public class TelaCadastroCliente extends JFrame {
         }
     }
 
-    public void removerCliente() {
+    private void removerCliente() {
         String cpf = JOptionPane.showInputDialog(this, "Digite o CPF do cliente para remover:");
         if (cpf == null || cpf.isBlank()) return;
 
@@ -146,7 +148,7 @@ public class TelaCadastroCliente extends JFrame {
         }
     }
 
-    public void atualizarListaClientes() {
+    private void atualizarListaClientes() {
         StringBuilder sb = new StringBuilder();
 
         if (clienteController.getClientes().isEmpty()) {
@@ -163,7 +165,7 @@ public class TelaCadastroCliente extends JFrame {
         areaClientes.setText(sb.toString());
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         this.campoNome.setText("");
         this.campoCpf.setText("");
         this.campoTelefone.setText("");

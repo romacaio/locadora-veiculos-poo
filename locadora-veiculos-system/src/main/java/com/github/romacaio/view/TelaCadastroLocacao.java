@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class TelaCadastroLocacao extends JFrame {
+public class TelaCadastroLocacao extends JDialog {
     private LocacaoController locacaoController;
     private ClienteController clienteController;
     private VeiculoController veiculoController;
@@ -75,6 +75,7 @@ public class TelaCadastroLocacao extends JFrame {
         JButton botaoRegistrar = new JButton("Registrar");
         botaoRegistrar.setBackground(new Color(0x144202));
         botaoRegistrar.setForeground(Color.white);
+        botaoRegistrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         botaoRegistrar.addActionListener(event -> registrarLocacao());
         panelFormulario.add(botaoRegistrar);
 
@@ -123,7 +124,7 @@ public class TelaCadastroLocacao extends JFrame {
         setSize(400, 500);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
@@ -139,7 +140,7 @@ public class TelaCadastroLocacao extends JFrame {
         }
     }
 
-    public void registrarLocacao() {
+    private void registrarLocacao() {
         String cpf = campoCPF.getText();
         String placa = campoPlaca.getText();
         int dias = Integer.parseInt(spinnerDias.getValue().toString());
@@ -162,7 +163,7 @@ public class TelaCadastroLocacao extends JFrame {
         }
     }
 
-    public void atualizarListaLocacoes() {
+    private void atualizarListaLocacoes() {
         StringBuilder sb = new StringBuilder();
         if (locacaoController.getLocacoes().isEmpty()) {
             sb.append("Sem locacações registradas");
@@ -179,7 +180,7 @@ public class TelaCadastroLocacao extends JFrame {
         areaLocacoes.setText(sb.toString());
     }
 
-    public void atualizarListaClientes() {
+    private void atualizarListaClientes() {
         modelClientes.clear();
 
         List<String> list = clienteController.getClientes().stream()
@@ -193,7 +194,7 @@ public class TelaCadastroLocacao extends JFrame {
         modelClientes.addAll(list);
     }
 
-    public void atualizarListaVeiculos() {
+    private void atualizarListaVeiculos() {
         modelVeiculos.clear();
         List<String> list = veiculoController.listarDisponiveis().stream()
                 .map(Veiculo::exibirResumo)
@@ -205,7 +206,7 @@ public class TelaCadastroLocacao extends JFrame {
         modelVeiculos.addAll(list);
     }
 
-    public void limparCampos() {
+    private void limparCampos() {
         this.campoCPF.setText("");
         this.campoPlaca.setText("");
         this.spinnerDias.setValue(1);
