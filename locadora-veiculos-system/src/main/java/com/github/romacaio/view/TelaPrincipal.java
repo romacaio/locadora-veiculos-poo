@@ -67,6 +67,7 @@ public class TelaPrincipal extends JFrame {
         JButton botaoUsuarios = new JButton("Usuários");
         botaoUsuarios.setCursor(new Cursor(Cursor.HAND_CURSOR));
         configurarCampo(botaoUsuarios);
+        botaoUsuarios.addActionListener(event -> abrirTelaUsuarios());
         panelMenu.add(botaoUsuarios);
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/images/carros.png"));
@@ -122,6 +123,15 @@ public class TelaPrincipal extends JFrame {
         try {
             PermissaoService.verificar(usuarioLogado, TipoUsuario.ADMIN, TipoUsuario.GERENTE, TipoUsuario.ATENDENTE);
             new TelaCadastroLocacao(locacaoController, clienteController, veiculoController);
+        } catch (SecurityException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Acesso negado", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void abrirTelaUsuarios() {
+        try {
+            PermissaoService.verificar(usuarioLogado, TipoUsuario.ADMIN, TipoUsuario.GERENTE);
+            new TelaCadastroUsuario(usuarioController);
         } catch (SecurityException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Acesso negado", JOptionPane.ERROR_MESSAGE);
         }

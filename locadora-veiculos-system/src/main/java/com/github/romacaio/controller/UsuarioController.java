@@ -31,6 +31,16 @@ public class UsuarioController {
         usuarioDao.salvar(usuarios);
     }
 
+    public void removerUsuario(String username) {
+        Usuario usuario = buscarUsuario(username);
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuário não econtrado");
+        }
+
+        usuarios.remove(usuario);
+        usuarioDao.salvar(usuarios);
+    }
+
     public Usuario loginUsuario(String userName, String senha) {
         Optional<Usuario> busca = usuarios.stream()
                 .filter(user -> user.getUserName().equals(userName)
@@ -55,6 +65,15 @@ public class UsuarioController {
             usuarios = usuarioDao.carregar();
         }
     }
+
+    public Usuario buscarUsuario(String username) {
+        Optional<Usuario> busca = usuarios.stream().
+                filter(user -> user.getUserName().equals(username))
+                .findFirst();
+
+        return busca.orElse(null);
+    }
+
 
     public boolean isAdmin() {
         return usuarioLogado != null
