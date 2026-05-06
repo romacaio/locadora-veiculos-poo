@@ -109,6 +109,7 @@ public class TelaCadastroUsuario extends JDialog {
             TipoUsuario tipoUsuario = TipoUsuario.parse(tipo);
             Usuario usuario = new Usuario(userName, senha, tipoUsuario);
             usuarioController.cadastrarUsuario(usuario);
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
             limparCampos();
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

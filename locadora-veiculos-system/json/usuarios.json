@@ -8,5 +8,10 @@
     "userName": "Caio Romão",
     "senha": "1412",
     "tipo": "ATENDENTE"
+  },
+  {
+    "userName": "Renan Torres",
+    "senha": "RenanT",
+    "tipo": "GERENTE"
   }
 ]

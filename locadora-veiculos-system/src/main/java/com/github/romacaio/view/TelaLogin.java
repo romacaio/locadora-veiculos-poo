@@ -65,7 +65,7 @@ public class TelaLogin extends JFrame {
         panelFormulario.add(Box.createVerticalStrut(30));
 
 
-        JButton botaoLogar = new JButton("Logar");
+        JButton botaoLogar = new JButton("Login");
         botaoLogar.setBackground(new Color(0x144202));
         botaoLogar.setForeground(Color.WHITE);
         botaoLogar.setCursor(new Cursor(Cursor.HAND_CURSOR));

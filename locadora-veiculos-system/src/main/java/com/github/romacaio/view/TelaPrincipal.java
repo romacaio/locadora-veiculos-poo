@@ -70,15 +70,29 @@ public class TelaPrincipal extends JFrame {
         botaoUsuarios.addActionListener(event -> abrirTelaUsuarios());
         panelMenu.add(botaoUsuarios);
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/images/carros.png"));
+        panelMenu.add(Box.createVerticalStrut(25));
 
-        int larguraOriginal = icon.getIconWidth();
-        int alturaOriginal = icon.getIconHeight();
+        ImageIcon iconLogout = new ImageIcon(getClass().getResource("/images/iconLogout.png"));
+        Image imagem = iconLogout.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        JButton botaoLogout = new JButton(new ImageIcon(imagem));
+        botaoLogout.setBorderPainted(false);
+        botaoLogout.setContentAreaFilled(false);
+        botaoLogout.setFocusPainted(false);
+        botaoLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        configurarCampo(botaoLogout);
+        botaoLogout.addActionListener(event -> logout());
+        panelMenu.add(botaoLogout);
+
+        ImageIcon iconCarros = new ImageIcon(getClass().getResource("/images/carros.png"));
+
+        int larguraOriginal = iconCarros.getIconWidth();
+        int alturaOriginal = iconCarros.getIconHeight();
 
         int novaLargura = 700;
         int novaAltura = (alturaOriginal * novaLargura) / larguraOriginal;
 
-        Image imagemRedimensionada = icon.getImage().getScaledInstance(novaLargura, novaAltura, Image.SCALE_SMOOTH);
+        Image imagemRedimensionada = iconCarros.getImage().getScaledInstance(novaLargura, novaAltura, Image.SCALE_SMOOTH);
 
         JLabel labelImagem = new JLabel(new ImageIcon(imagemRedimensionada));
 
@@ -135,5 +149,11 @@ public class TelaPrincipal extends JFrame {
         } catch (SecurityException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Acesso negado", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void logout() {
+        usuarioController.logout();
+        new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
+        this.dispose();
     }
 }
