@@ -4,6 +4,7 @@ import com.github.romacaio.controller.ClienteController;
 import com.github.romacaio.controller.LocacaoController;
 import com.github.romacaio.controller.UsuarioController;
 import com.github.romacaio.controller.VeiculoController;
+import com.github.romacaio.service.RelatorioService;
 
 public class TestSwing {
     public static void main(String[] args) {
@@ -12,6 +13,9 @@ public class TestSwing {
         ClienteController clienteController = new ClienteController(locacaoController);
         UsuarioController usuarioController = new UsuarioController();
 
-        TelaLogin telaLogin = new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
+        //TelaLogin telaLogin = new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
+        RelatorioService relatorioService = new RelatorioService();
+        relatorioService.gerarRelatorioVeiculos(veiculoController.getVeiculos());
+        relatorioService.gerarRelatorioLocacoes(locacaoController.getLocacoes());
     }
 }
