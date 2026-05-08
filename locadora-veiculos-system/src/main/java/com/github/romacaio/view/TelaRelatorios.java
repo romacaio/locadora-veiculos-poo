@@ -69,7 +69,7 @@ public class TelaRelatorios extends JDialog {
         switch (relatorio) {
             case ("Faturamento mensal") -> gerarRelatorioFaturamento();
             case ("Clientes") -> gerarRelatorioClientes();
-            case ("Veiculos") -> gerarRelatorioVeiculos();
+            case ("Veículos") -> gerarRelatorioVeiculos();
         }
         JOptionPane.showMessageDialog(this, "Relatório gerado com sucesso!");
     }

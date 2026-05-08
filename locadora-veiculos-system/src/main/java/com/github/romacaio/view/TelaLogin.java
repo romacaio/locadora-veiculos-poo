@@ -22,6 +22,7 @@ public class TelaLogin extends JFrame {
             ClienteController clienteController,
             VeiculoController veiculoController,
             LocacaoController locacaoController
+
     ) {
         this.usuarioController = usuarioController;
         this.clienteController = clienteController;

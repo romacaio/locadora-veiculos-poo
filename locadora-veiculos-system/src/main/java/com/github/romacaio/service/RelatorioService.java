@@ -85,7 +85,7 @@ public class RelatorioService {
 
     public void gerarRelatorioClientesLocacoes(List<Locacao> locacoes) {
         try {
-            Files.createDirectories(Path.of("./relatorios/locacoes"));
+            Files.createDirectories(Path.of("./relatorios/clientes"));
 
         } catch (IOException e) {
             throw new RuntimeException("Erro ao gerar relatório", e);
@@ -95,7 +95,7 @@ public class RelatorioService {
 
         Document document = new Document();
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("relatorios/locacoes/locacoes_" + dataHora + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("relatorios/clientes/clientes_" + dataHora + ".pdf"));
             document.open();
 
             Paragraph titulo = new Paragraph("Relatório locações por clientes");

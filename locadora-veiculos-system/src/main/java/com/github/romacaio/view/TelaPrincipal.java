@@ -7,6 +7,7 @@ import com.github.romacaio.controller.VeiculoController;
 import com.github.romacaio.model.usuario.TipoUsuario;
 import com.github.romacaio.model.usuario.Usuario;
 import com.github.romacaio.service.PermissaoService;
+import com.github.romacaio.service.RelatorioService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,15 +17,22 @@ public class TelaPrincipal extends JFrame {
     private ClienteController clienteController;
     private VeiculoController veiculoController;
     private LocacaoController locacaoController;
+    private RelatorioService relatorioService;
 
     private Usuario usuarioLogado;
 
-    public TelaPrincipal(UsuarioController usuarioController, ClienteController clienteController, VeiculoController veiculoController, LocacaoController locacaoController) {
+    public TelaPrincipal(
+            UsuarioController usuarioController,
+            ClienteController clienteController,
+            VeiculoController veiculoController,
+            LocacaoController locacaoController) {
+
         this.usuarioController = usuarioController;
         this.usuarioLogado = usuarioController.getUsuarioLogado();
         this.clienteController = clienteController;
         this.veiculoController = veiculoController;
         this.locacaoController = locacaoController;
+        this.relatorioService = new RelatorioService();
 
         setTitle("Locadora");
         setLayout(new BorderLayout());
@@ -54,13 +62,21 @@ public class TelaPrincipal extends JFrame {
         botaoVeiculos.addActionListener(event -> abrirTelaVeiculos());
         panelMenu.add(botaoVeiculos);
 
-        panelMenu.add(Box.createVerticalStrut(35));
+        panelMenu.add(Box.createVerticalStrut(20));
 
         JButton botaoLocacoes = new JButton("Locações");
         botaoLocacoes.setCursor(new Cursor(Cursor.HAND_CURSOR));
         configurarCampo(botaoLocacoes);
         botaoLocacoes.addActionListener(event -> abrirTelaLocacoes());
         panelMenu.add(botaoLocacoes);
+
+        panelMenu.add(Box.createVerticalStrut(20));
+
+        JButton botaoRelatorios = new JButton("Relatórios");
+        botaoRelatorios.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        configurarCampo(botaoRelatorios);
+        botaoRelatorios.addActionListener(event -> abrirTelaRelatorios());
+        panelMenu.add(botaoRelatorios);
 
         panelMenu.add(Box.createVerticalStrut(20));
 
@@ -82,10 +98,10 @@ public class TelaPrincipal extends JFrame {
         botaoLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
         configurarCampo(botaoLogout);
         botaoLogout.addActionListener(event -> logout());
+
         panelMenu.add(botaoLogout);
 
         ImageIcon iconCarros = new ImageIcon(getClass().getResource("/images/carros.png"));
-
         int larguraOriginal = iconCarros.getIconWidth();
         int alturaOriginal = iconCarros.getIconHeight();
 
@@ -93,7 +109,6 @@ public class TelaPrincipal extends JFrame {
         int novaAltura = (alturaOriginal * novaLargura) / larguraOriginal;
 
         Image imagemRedimensionada = iconCarros.getImage().getScaledInstance(novaLargura, novaAltura, Image.SCALE_SMOOTH);
-
         JLabel labelImagem = new JLabel(new ImageIcon(imagemRedimensionada));
 
         JPanel panelImagem = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 40));
@@ -108,8 +123,8 @@ public class TelaPrincipal extends JFrame {
     }
 
     private void configurarCampo(JComponent component) {
-        component.setMaximumSize(new Dimension(120, 40));
-        component.setPreferredSize(new Dimension(120, 40));
+        component.setMaximumSize(new Dimension(100, 35));
+        component.setPreferredSize(new Dimension(100, 35));
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
 
     }
@@ -146,6 +161,16 @@ public class TelaPrincipal extends JFrame {
         try {
             PermissaoService.verificar(usuarioLogado, TipoUsuario.ADMIN, TipoUsuario.GERENTE);
             new TelaCadastroUsuario(usuarioController);
+        } catch (SecurityException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Acesso negado", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void abrirTelaRelatorios() {
+        try {
+            PermissaoService.verificar(usuarioLogado, TipoUsuario.ADMIN, TipoUsuario.GERENTE);
+            new TelaRelatorios(locacaoController, relatorioService);
+
         } catch (SecurityException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Acesso negado", JOptionPane.ERROR_MESSAGE);
         }
