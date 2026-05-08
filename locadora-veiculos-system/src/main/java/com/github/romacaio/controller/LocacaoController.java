@@ -88,6 +88,10 @@ public class LocacaoController {
         return filtrar(loc -> loc.getDataDevolucao() == null);
     }
 
+    public List<Locacao> listarFinalizadas() {
+        return filtrar(loc -> loc.getDataDevolucao() != null);
+    }
+
     private List<Locacao> filtrar(Predicate<Locacao> predicate) {
         return locacoes.stream()
                 .filter(predicate)

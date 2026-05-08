@@ -3,7 +3,7 @@ package com.github.romacaio.controller;
 import com.github.romacaio.dao.VeiculoDao;
 import com.github.romacaio.model.veiculo.Status;
 import com.github.romacaio.model.veiculo.Veiculo;
-import com.github.romacaio.util.Validator;
+import com.github.romacaio.util.ValidatorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,11 @@ public class VeiculoController {
     }
 
     public void cadastrarVeiculo(Veiculo veiculo) {
-        if (!Validator.isPlacaValida(veiculo.getPlaca())) {
+        if (!ValidatorUtil.isPlacaValida(veiculo.getPlaca())) {
             throw new IllegalArgumentException("Placa inválida");
         }
 
-        if (!Validator.isAnoVeiculoValido(veiculo.getAno())) {
+        if (!ValidatorUtil.isAnoVeiculoValido(veiculo.getAno())) {
             throw new IllegalArgumentException("Ano inválido");
         }
 

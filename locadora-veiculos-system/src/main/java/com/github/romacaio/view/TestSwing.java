@@ -15,7 +15,8 @@ public class TestSwing {
 
         //TelaLogin telaLogin = new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
         RelatorioService relatorioService = new RelatorioService();
-        relatorioService.gerarRelatorioVeiculos(veiculoController.getVeiculos());
-        relatorioService.gerarRelatorioLocacoes(locacaoController.getLocacoes());
+        relatorioService.gerarRelatorioVeiculosLocacoes(locacaoController.getLocacoes());
+        relatorioService.gerarRelatorioClientesLocacoes(locacaoController.getLocacoes());
+        relatorioService.gerarRelatorioFaturamentoMensal(locacaoController.listarFinalizadas());
     }
 }

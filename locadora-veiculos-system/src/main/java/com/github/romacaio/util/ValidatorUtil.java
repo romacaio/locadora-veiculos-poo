@@ -2,7 +2,7 @@ package com.github.romacaio.util;
 
 import java.time.Year;
 
-public class Validator {
+public class ValidatorUtil {
 
     public static boolean isNomeValido(String nome) {
         return !nome.isBlank()

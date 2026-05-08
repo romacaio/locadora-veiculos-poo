@@ -2,7 +2,7 @@ package com.github.romacaio.controller;
 
 import com.github.romacaio.dao.ClienteDao;
 import com.github.romacaio.model.cliente.Cliente;
-import com.github.romacaio.util.Validator;
+import com.github.romacaio.util.ValidatorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +21,19 @@ public class ClienteController {
     }
 
     public void cadastrarCliente(Cliente cliente) {
-        if (!Validator.isNomeValido(cliente.getNome())) {
+        if (!ValidatorUtil.isNomeValido(cliente.getNome())) {
             throw new IllegalArgumentException("Nome inválido");
         }
 
-        if (!Validator.isCpfValido(cliente.getCpf())) {
+        if (!ValidatorUtil.isCpfValido(cliente.getCpf())) {
             throw new IllegalArgumentException("CPF inválido");
         }
 
-        if (!Validator.isTelefoneValido(cliente.getTelefone())) {
+        if (!ValidatorUtil.isTelefoneValido(cliente.getTelefone())) {
             throw new IllegalArgumentException("Telefone inválido");
         }
 
-        if (!Validator.isEmailValido(cliente.getEmail())) {
+        if (!ValidatorUtil.isEmailValido(cliente.getEmail())) {
             throw new IllegalArgumentException("Email inválido");
         }
 
