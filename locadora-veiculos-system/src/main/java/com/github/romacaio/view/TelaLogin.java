@@ -76,7 +76,7 @@ public class TelaLogin extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
@@ -84,7 +84,6 @@ public class TelaLogin extends JFrame {
         component.setMaximumSize(new Dimension(120, 30));
         component.setPreferredSize(new Dimension(120, 30));
         component.setAlignmentX(Component.CENTER_ALIGNMENT);
-
     }
 
     private void logarUsuario() {

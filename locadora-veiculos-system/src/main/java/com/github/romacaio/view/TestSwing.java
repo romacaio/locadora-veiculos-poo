@@ -12,11 +12,9 @@ public class TestSwing {
         LocacaoController locacaoController = new LocacaoController(veiculoController);
         ClienteController clienteController = new ClienteController(locacaoController);
         UsuarioController usuarioController = new UsuarioController();
-
-        //TelaLogin telaLogin = new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
         RelatorioService relatorioService = new RelatorioService();
-        relatorioService.gerarRelatorioVeiculosLocacoes(locacaoController.getLocacoes());
-        relatorioService.gerarRelatorioClientesLocacoes(locacaoController.getLocacoes());
-        relatorioService.gerarRelatorioFaturamentoMensal(locacaoController.listarFinalizadas());
+
+        TelaLogin telaLogin = new TelaLogin(usuarioController, clienteController, veiculoController, locacaoController);
+        //TelaRelatorios telaRelatorios = new TelaRelatorios(locacaoController, relatorioService);
     }
 }
